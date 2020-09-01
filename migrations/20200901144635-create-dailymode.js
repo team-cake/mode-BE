@@ -1,37 +1,22 @@
 'use strict'
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		await queryInterface.createTable('users', {
+		await queryInterface.createTable('dailymodes', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			firstName: {
-				type: Sequelize.STRING,
+			mode: {
+				type: Sequelize.INTEGER,
 				allowNull: false,
 			},
-			lastName: {
+			comment: {
 				type: Sequelize.STRING,
-				allowNull: false,
 			},
-			email: {
+			image: {
 				type: Sequelize.STRING,
-				unique: true,
-				allowNull: false,
-			},
-			password: {
-				type: Sequelize.STRING,
-				allowNull: false,
-			},
-			dateOfBirth: {
-				type: Sequelize.DATE,
-				allowNull: false,
-			},
-			githubLink: {
-				type: Sequelize.STRING,
-				allowNull: false,
 			},
 			createdAt: {
 				allowNull: false,
@@ -44,6 +29,6 @@ module.exports = {
 		})
 	},
 	down: async (queryInterface, Sequelize) => {
-		await queryInterface.dropTable('users')
+		await queryInterface.dropTable('dailymodes')
 	},
 }
