@@ -3,7 +3,7 @@ const loggerMiddleWare = require('morgan')
 const corsMiddleWare = require('cors')
 const { PORT } = require('./config/constants')
 const authRouter = require('./routers/auth')
-const dailyModeRouter = require('./routers/dailymode')
+const dailyModeRouter = require('./routers/dailyMode')
 //const authMiddleWare = require("./auth/middleware");
 
 const app = express()
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/', authRouter)
-app.use('/', travelRouter)
+app.use('/', dailyModeRouter)
 
 app.listen(PORT, () => {
 	console.log(`🚀 Launched on port: ${PORT}`)
