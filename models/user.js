@@ -32,11 +32,11 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			dateOfBirth: {
-				type: DataTypes:DATE,
+				type: DataTypes.DATE,
 				allowNull: false,
 			},
 			githubLink: {
-				type: DataTypes:DATE,
+				type: DataTypes.DATE,
 				allowNull: false,
 			},
 		},
