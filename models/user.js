@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			githubLink: {
-				type: DataTypes.DATE,
+				type: DataTypes.STRING,
 				allowNull: false,
 			},
 		},
