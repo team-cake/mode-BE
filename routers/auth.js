@@ -31,7 +31,7 @@ router.post('/login', async (req, res, next) => {
 
 		delete user.dataValues['password'] // don't send back the password hash
 		const token = toJWT({
-			id: user.id,
+			userId: user.id,
 			firstName: user.firstName,
 			lastName: user.lastName,
 			email: user.email,
@@ -105,7 +105,7 @@ router.get('/me', authMiddleware, async (req, res) => {
 		include: [Dailymode],
 	})
 	delete req.user.dataValues['password']
-	res.status(200).send({ ...req.user.dataValues })
+	res.status(200).send({ ...req.user.dataValues, dailyMode })
 })
 
 module.exports = router
