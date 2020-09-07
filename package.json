@@ -1,5 +1,5 @@
 {
-	"name": "server-template",
+	"name": "Mode-BE",
 	"version": "1.0.0",
 	"description": "Simple express server with sequelize, pg and jwts",
 	"main": "index.js",
@@ -22,11 +22,9 @@
 	"author": "Rein Op 't Land",
 	"license": "MIT",
 	"dependencies": {
-		"apollo-server": "^2.17.0",
 		"bcrypt": "^5.0.0",
 		"cors": "^2.8.5",
 		"express": "^4.17.1",
-		"graphql": "^15.3.0",
 		"jsonwebtoken": "^8.5.1",
 		"morgan": "^1.9.1",
 		"pg": "^8.3.0",
