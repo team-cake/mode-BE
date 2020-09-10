@@ -6,13 +6,16 @@ const auth = require('../auth/middleware')
 const router = new Router()
 
 router.get('/dailymode', async (req, res) => {
-	const limit = req.query.limit || 10
-	const offset = req.query.offset || 0
-	const dailymode = await Dailymode.findAndCountAll({
-		limit,
-		offset,
+	// const limit = req.query.limit || 10
+	// const offset = req.query.offset || 0
+	const dailymode = await Dailymode
+		.findAndCountAll
+		// {
+		// limit,
+		// offset,
 		// include: [User],
-	})
+		// }
+		()
 	res.status(200).send(dailymode)
 })
 
