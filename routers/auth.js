@@ -95,6 +95,25 @@ router.post('/signup', async (req, res) => {
 	}
 })
 
+router.get('/user/:id', async (req, res) => {
+	const { id } = req.params
+
+	console.log(id)
+	if (isNaN(parseInt(id))) {
+		return res.status(400).send({ message: 'User Id is not a number' })
+	}
+
+	const user = await User.findByPk(id, {
+		include: [Dailymode],
+	})
+
+	if (user === null) {
+		return res.status(404).send({ message: 'User not found' })
+	}
+
+	res.status(200).send(user)
+})
+
 // The /me endpoint can be used to:
 // - get the users email & name using only their token
 // - checking if a token is (still) valid
