@@ -11,9 +11,9 @@ router.get('/dailymode', async (req, res) => {
 	const dailymode = await Dailymode.findAndCountAll({
 		limit,
 		offset,
-		include: [User],
+		// include: [User],
 	})
-	res.status(200).send({ message: 'ok', dailymode })
+	res.status(200).send(dailymode)
 })
 
 router.get('/dailymode/:id', async (req, res) => {
@@ -24,15 +24,44 @@ router.get('/dailymode/:id', async (req, res) => {
 		return res.status(400).send({ message: 'DailymodeId is not a number' })
 	}
 
-	const mode = await Dailymode.findByPk(id, {
-		include: [User],
-	})
+	const mode = await Dailymode.findByPk(
+		id
+		// 	{
+		// 	include: [User],
+		// }
+	)
 
 	if (mode === null) {
 		return res.status(404).send({ message: 'Dailymode not found' })
 	}
 
-	res.status(200).send({ message: 'ok', mode })
+	res.status(200).send(mode)
+})
+
+router.get('/user/:id/dailymode', async (req, res) => {
+	const { id } = req.params
+	const limit = req.query.limit || 10
+	const offset = req.query.offset || 0
+	console.log(id)
+	if (isNaN(parseInt(id))) {
+		return res.status(400).send({ message: 'userId is not a number' })
+	}
+
+	const mode = await User.findByPk(
+		id,
+		// mood,
+		// comment,
+		// image,
+		// limit,
+		// offset,
+		{ include: [Dailymode] }
+	)
+
+	if (mode === null) {
+		return res.status(404).send({ message: 'Dailymode not found' })
+	}
+
+	res.status(200).send(mode)
 })
 
 router.post('/dailymode', async (req, res) => {
