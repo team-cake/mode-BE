@@ -105,7 +105,7 @@ module.exports = {
 					userId: 3,
 				},
 				{
-					mode: 3,
+					mode: 1,
 					comment: 'just chilling in the Matrix',
 					image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
 					createdAt: '2020-09-07',
@@ -113,7 +113,7 @@ module.exports = {
 					userId: 1,
 				},
 				{
-					mode: 3,
+					mode: 1,
 					comment: 'just chilling in the Matrix',
 					image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
 					createdAt: '2020-09-07',
@@ -121,7 +121,7 @@ module.exports = {
 					userId: 2,
 				},
 				{
-					mode: 3,
+					mode: 1,
 					comment: 'just chilling in the Matrix',
 					image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
 					createdAt: '2020-09-07',
