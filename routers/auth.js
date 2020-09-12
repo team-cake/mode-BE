@@ -13,9 +13,10 @@ router.post('/login', async (req, res, next) => {
 		const { email, password } = req.body
 
 		if (!email || !password) {
-			return res
-				.status(400)
-				.send({ message: 'Please provide both email and password' })
+			return res.status(200).json({
+				status: false,
+				message: 'Please provide both email and password',
+			})
 		}
 
 		const user = await User.findOne({
@@ -24,8 +25,9 @@ router.post('/login', async (req, res, next) => {
 		})
 
 		if (!user || !bcrypt.compareSync(password, user.password)) {
-			return res.status(400).send({
-				message: 'User with that email not found or password incorrect',
+			return res.status(200).json({
+				status: false,
+				message: 'Invalid email or password!',
 			})
 		}
 
@@ -38,7 +40,9 @@ router.post('/login', async (req, res, next) => {
 			dateOfBirth: user.dateOfBirth,
 			githubLink: user.githubLink,
 		})
-		return res.status(200).send({ token, ...user.dataValues })
+		return res
+			.status(200)
+			.send({ status: true, user: { token, user: user.dataValues } })
 	} catch (error) {
 		console.log(error)
 		return res.status(400).send({ message: 'Something went wrong, sorry' })
@@ -55,11 +59,11 @@ router.post('/signup', async (req, res) => {
 		githubLink,
 	} = req.body
 	if (!firstName || !lastName || !email || !password || !dateOfBirth) {
-		return res
-			.status(400)
-			.send(
-				'Please provide required information: first name, last name, email, password, and date of birth.'
-			)
+		return res.status(200).json({
+			status: false,
+			message:
+				'Please provide required information: first name, last name, email, password, and date of birth.',
+		})
 	}
 
 	try {
@@ -83,15 +87,26 @@ router.post('/signup', async (req, res) => {
 			githubLink: newUser.githubLink,
 		})
 
-		res.status(201).json({ token, ...newUser.dataValues })
+		res
+			.status(200)
+			.json({ status: true, user: { token, user: newUser.dataValues } })
 	} catch (error) {
 		if (error.name === 'SequelizeUniqueConstraintError') {
-			return res
-				.status(400)
-				.send({ message: 'There is an existing account with this email' })
+			return res.status(200).json({
+				status: false,
+				message: 'There is an existing account with this email',
+			})
 		}
-
-		return res.status(400).send({ message: 'Something went wrong, sorry' })
+		if (error.name) {
+			return res.status(200).json({
+				status: false,
+				message: error.message,
+			})
+		}
+		return res.status(200).json({
+			status: false,
+			message: 'Something went wrong, try again later!',
+		})
 	}
 })
 

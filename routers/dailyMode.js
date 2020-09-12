@@ -24,7 +24,9 @@ router.get('/dailymode/:id', async (req, res) => {
 
 	console.log(id)
 	if (isNaN(parseInt(id))) {
-		return res.status(400).send({ message: 'DailymodeId is not a number' })
+		return res
+			.status(200)
+			.json({ status: false, message: 'DailymodeId is not a number' })
 	}
 
 	const mode = await Dailymode.findByPk(
@@ -43,6 +45,7 @@ router.get('/dailymode/:id', async (req, res) => {
 
 router.get('/user/dailymode/:id', async (req, res) => {
 	const { id } = req.params
+	const userId = id
 	const limit = req.query.limit || 10
 	const offset = req.query.offset || 0
 	console.log(id)
@@ -50,21 +53,15 @@ router.get('/user/dailymode/:id', async (req, res) => {
 		return res.status(400).send({ message: 'userId is not a number' })
 	}
 
-	const mode = await Dailymode.findByPk(
-		userId
-		// mood,
-		// comment,
-		// image,
-		// limit,
-		// offset,
-		// { include: [Dailymode] }
-	)
+	const mode = await Dailymode.findByPk(userId)
 
 	if (mode === null) {
-		return res.status(404).send({ message: 'Dailymode not found' })
+		return res
+			.status(200)
+			.json({ status: false, message: 'Dailymode not found' })
 	}
 
-	res.status(200).send(mode)
+	res.status(200).json({ status: true, mode })
 })
 
 router.post('/dailymode', async (req, res) => {

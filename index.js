@@ -17,7 +17,7 @@ app.use(corsMiddleWare())
 
 // GET endpoint for testing purposes, can be removed
 app.get('/', (req, res) => {
-	res.send('Hi from express')
+	res.send('Hi from the mode back end!')
 })
 
 app.use('/', authRouter)
