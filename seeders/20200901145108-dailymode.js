@@ -47,7 +47,7 @@ module.exports = {
 				},
 				{
 					mode: 2,
-					comment: 'This is the way',
+					comment: 'Progress?',
 					image: 'https://img.devrant.com/devrant/rant/r_1825530_6oF8Q.jpg',
 					createdAt: '2020-09-4',
 					updatedAt: new Date(),
